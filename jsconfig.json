@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx", // Ensures that JSX is treated correctly
+    "checkJs": true // Enables type checking in JavaScript files
+  },
+  "include": [
+    "src/**/*" // Include all files in the src directory
+  ],
+  "exclude": [
+    "node_modules", // You generally want to exclude node_modules
+    "dist" // Exclude dist if you have build output
+  ]
+}

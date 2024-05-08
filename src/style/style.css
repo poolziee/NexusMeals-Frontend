@@ -1,0 +1,42 @@
+a {
+    margin: 0;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.43;
+    letter-spacing: 0.01071em;
+    color: #3f51b5;
+    -webkit-text-decoration: underline;
+    text-decoration: underline;
+    text-decoration-color: rgba(63, 81, 181, 0.4);
+}
+
+.page {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+}
+
+
+/* simple - enter transition 300ms, exit 150ms */
+.fade-appear,
+.fade-enter {
+    opacity: 0;
+    z-index: 1;
+}
+
+.fade-appear-active,
+.fade-enter.fade-enter-active {
+    opacity: 1;
+    transition: opacity 300ms linear 150ms;
+}
+
+.fade-exit {
+    opacity: 1;
+}
+
+.fade-exit.fade-exit-active {
+    opacity: 0;
+    transition: opacity 150ms linear;
+}
