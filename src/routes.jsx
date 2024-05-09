@@ -4,6 +4,12 @@ import Customer from "./pages/Customer";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Todo from "./pages/Todo";
+import CategoryCreate from "./pages/chef/CategoryCreate";
+import CategoryList from "./pages/chef/CategoryList";
+import CategoryUpdate from "./pages/chef/CategoryUpdate";
+import ProductCreate from "./pages/chef/ProductCreate";
+import ProductList from "./pages/chef/ProductList";
+import ProductUpdate from "./pages/chef/ProductUpdate";
 
 const routes = [
   {
@@ -42,27 +48,27 @@ const routes = [
       },
       {
         path: "categories",
-        element: <Todo name="ChefCategories" />,
+        element: <CategoryList />,
       },
       {
         path: "categories/create",
-        element: <Todo name="CreateCategory" />,
+        element: <CategoryCreate />,
       },
       {
-        path: "categories/:categoryId/update",
-        element: <Todo name="UpdateCategory" />,
+        path: "categories/update",
+        element: <CategoryUpdate />,
       },
       {
         path: "products",
-        element: <Todo name="ChefProducts" />,
+        element: <ProductList />,
       },
       {
         path: "products/create",
-        element: <Todo name="CreateProduct" />,
+        element: <ProductCreate />,
       },
       {
-        path: "products/:productId/update",
-        element: <Todo name="ProductUpdate" />,
+        path: "products/update",
+        element: <ProductUpdate />,
       },
       {
         path: "history",
