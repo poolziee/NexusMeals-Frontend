@@ -10,6 +10,8 @@ import CategoryUpdate from "./pages/chef/CategoryUpdate";
 import ProductCreate from "./pages/chef/ProductCreate";
 import ProductList from "./pages/chef/ProductList";
 import ProductUpdate from "./pages/chef/ProductUpdate";
+import ChefBrowse from "./pages/customer/ChefBrowse";
+import ProductBrowse from "./pages/customer/ProductBrowse";
 
 const routes = [
   {
@@ -30,11 +32,15 @@ const routes = [
     children: [
       {
         path: "",
-        element: <Todo name="BrowseChefs" />,
+        element: <ChefBrowse />,
       },
       {
         path: "history",
         element: <Todo name="CustomerOrderHistory" />,
+      },
+      {
+        path: "browse-products",
+        element: <ProductBrowse />,
       },
     ],
   },

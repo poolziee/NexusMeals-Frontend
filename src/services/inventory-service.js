@@ -1,3 +1,4 @@
+import { TroubleshootOutlined } from "@mui/icons-material";
 import authService from "./auth-service";
 import req from "./nex-axios";
 
@@ -45,6 +46,14 @@ const getMyProducts = async () => {
   return products;
 };
 
+const browseCategories = async (chefId) => {
+  return req
+    .post("/inventory/categories", { chefId, withProducts: true })
+    .then((response) => {
+      return Promise.resolve(response.data);
+    });
+};
+
 export default {
   getMyCategories,
   getMyCategoryNames,
@@ -53,4 +62,5 @@ export default {
   getMyProducts,
   createProduct,
   updateProduct,
+  browseCategories,
 };
