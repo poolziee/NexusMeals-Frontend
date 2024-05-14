@@ -32,6 +32,10 @@ const CategoryList = () => {
     }
   }, [mounted]);
 
+  const refreshCategories = useCallback(() => {
+    getMyCategories();
+  }, [getMyCategories]);
+
   useEffect(() => {
     getMyCategories();
   }, [getMyCategories]);
@@ -108,7 +112,10 @@ const CategoryList = () => {
             </Grid>
           </Grid>
           <Box sx={{ mt: 3 }}>
-            <CategoryListTable categoriesFull={categories} />
+            <CategoryListTable
+              categoriesFull={categories}
+              onRefresh={refreshCategories}
+            />
           </Box>
         </Container>
       </Box>

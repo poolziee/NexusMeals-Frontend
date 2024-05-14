@@ -32,6 +32,10 @@ const ProductList = () => {
     }
   }, [mounted]);
 
+  const refreshProducts = useCallback(() => {
+    getMyProducts();
+  }, [getMyProducts]);
+
   useEffect(() => {
     getMyProducts();
   }, [getMyProducts]);
@@ -108,7 +112,7 @@ const ProductList = () => {
             </Grid>
           </Grid>
           <Box sx={{ mt: 3 }}>
-            <ProductListTable products={products} />
+            <ProductListTable products={products} onRefresh={refreshProducts} />
           </Box>
         </Container>
       </Box>

@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import TrashIcon from "../../icons/Trash";
 
 import {
   Box,
@@ -21,7 +22,7 @@ import ImageIcon from "../../icons/Image";
 import PencilAltIcon from "../../icons/PencilAlt";
 import SearchIcon from "../../icons/Search";
 import Scrollbar from "../Scrollbar";
-
+import inventoryService from "../../services/inventory-service";
 const sortOptions = [
   {
     label: "Category",
@@ -46,7 +47,7 @@ const applyFilters = (products, query) =>
 const applyPagination = (products, page, limit) =>
   products.slice(page * limit, page * limit + limit);
 
-const ProductListTable = ({ products, ...other }) => {
+const ProductListTable = ({ products, onRefresh, ...other }) => {
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(10);
@@ -73,6 +74,11 @@ const ProductListTable = ({ products, ...other }) => {
     navigate("/chef/products/update", {
       state: { product },
     });
+  };
+
+  const handleDeleteProduct = async (product) => {
+    await inventoryService.deleteProduct(product);
+    onRefresh();
   };
 
   // Usually query is done on backend with indexing solutions
@@ -153,7 +159,8 @@ const ProductListTable = ({ products, ...other }) => {
                 <TableCell>Category</TableCell>
                 <TableCell>Quantity</TableCell>
                 <TableCell>Price</TableCell>
-                <TableCell align="right">Actions</TableCell>
+                <TableCell>Edit</TableCell>
+                <TableCell>Delete</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -215,7 +222,7 @@ const ProductListTable = ({ products, ...other }) => {
                     <TableCell>{product.category}</TableCell>
                     <TableCell>{product.quantity}</TableCell>
                     <TableCell>{product.price}€</TableCell>
-                    <TableCell align="right">
+                    <TableCell>
                       <div
                         data-tag={product}
                         onClick={() => {
@@ -224,6 +231,18 @@ const ProductListTable = ({ products, ...other }) => {
                       >
                         <IconButton>
                           <PencilAltIcon fontSize="small" />
+                        </IconButton>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div
+                        data-tag={product}
+                        onClick={() => {
+                          handleDeleteProduct(product);
+                        }}
+                      >
+                        <IconButton>
+                          <TrashIcon color="error" fontSize="small" />
                         </IconButton>
                       </div>
                     </TableCell>

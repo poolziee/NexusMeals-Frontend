@@ -3,6 +3,8 @@ import UserIcon from "../../icons/User";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import FoodBankIcon from "@mui/icons-material/FoodBank";
 import ChartPieIcon from "../../icons/ChartPie";
+import ClassIcon from "@mui/icons-material/Class";
+import InventoryIcon from "@mui/icons-material/Inventory";
 
 const SidebarSections = (role) => {
   if (role === "CHEF") {
@@ -22,33 +24,13 @@ const SidebarSections = (role) => {
         items: [
           {
             title: "Categories",
-            icon: <FolderOpenIcon fontSize="small" />,
+            icon: <ClassIcon fontSize="small" />,
             path: "/chef/categories",
-            children: [
-              {
-                title: "Create",
-                path: "/chef/categories/create",
-              },
-              {
-                title: "List",
-                path: "/chef/categories",
-              },
-            ],
           },
           {
             title: "Products",
-            icon: <FolderOpenIcon fontSize="small" />,
+            icon: <InventoryIcon fontSize="small" />,
             path: "/chef/products",
-            children: [
-              {
-                title: "Create",
-                path: "/chef/products/create",
-              },
-              {
-                title: "List",
-                path: "/chef/products",
-              },
-            ],
           },
         ],
       },

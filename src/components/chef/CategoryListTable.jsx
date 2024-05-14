@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -21,6 +21,8 @@ import ImageIcon from "../../icons/Image";
 import PencilAltIcon from "../../icons/PencilAlt";
 import SearchIcon from "../../icons/Search";
 import Scrollbar from "../Scrollbar";
+import TrashIcon from "../../icons/Trash";
+import inventoryService from "../../services/inventory-service";
 
 const sortOptions = [
   {
@@ -46,7 +48,7 @@ const applyFilters = (categories, query) =>
 const applyPagination = (categories, page, limit) =>
   categories.slice(page * limit, page * limit + limit);
 
-const CategoryListTable = ({ categoriesFull, ...other }) => {
+const CategoryListTable = ({ categoriesFull, onRefresh, ...other }) => {
   const navigate = useNavigate();
   const categories = categoriesFull.map((category) => ({
     ...category,
@@ -77,6 +79,11 @@ const CategoryListTable = ({ categoriesFull, ...other }) => {
     navigate("/chef/categories/update", {
       state: { category },
     });
+  };
+
+  const handleDeleteCategory = async (category) => {
+    await inventoryService.deleteCategory(category);
+    onRefresh();
   };
 
   // Usually query is done on backend with indexing solutions
@@ -155,7 +162,8 @@ const CategoryListTable = ({ categoriesFull, ...other }) => {
                 <TableCell>Name</TableCell>
                 <TableCell>Description</TableCell>
                 <TableCell>Total Products</TableCell>
-                <TableCell align="right">Actions</TableCell>
+                <TableCell>Edit</TableCell>
+                <TableCell>Delete</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -215,7 +223,7 @@ const CategoryListTable = ({ categoriesFull, ...other }) => {
                     </TableCell>
                     <TableCell>{category.description}</TableCell>
                     <TableCell>{category.products}</TableCell>
-                    <TableCell align="right">
+                    <TableCell>
                       <div
                         data-tag={category}
                         onClick={() => {
@@ -224,6 +232,18 @@ const CategoryListTable = ({ categoriesFull, ...other }) => {
                       >
                         <IconButton>
                           <PencilAltIcon fontSize="small" />
+                        </IconButton>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div
+                        data-tag={category}
+                        onClick={() => {
+                          handleDeleteCategory(category);
+                        }}
+                      >
+                        <IconButton>
+                          <TrashIcon color="error" fontSize="small" />
                         </IconButton>
                       </div>
                     </TableCell>

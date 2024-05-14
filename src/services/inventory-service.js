@@ -26,6 +26,22 @@ const updateCategory = async (category) => {
   return req.put("/inventory/category/update", category);
 };
 
+const deleteCategory = async (category) => {
+  return req
+    .post("/inventory/category/delete", { id: category.id })
+    .then((response) => {
+      return Promise.resolve(response.data);
+    });
+};
+
+const deleteProduct = async (product) => {
+  return req
+    .post("/inventory/product/delete", { id: product.id })
+    .then((response) => {
+      return Promise.resolve(response.data);
+    });
+};
+
 const createProduct = async (product) => {
   return req.post("/inventory/product/create", product);
 };
@@ -63,4 +79,6 @@ export default {
   createProduct,
   updateProduct,
   browseCategories,
+  deleteCategory,
+  deleteProduct,
 };
