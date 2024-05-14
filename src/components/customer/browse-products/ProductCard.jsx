@@ -16,7 +16,7 @@ const ProductCard = ({ product }) => (
         {product.description}
       </Typography>
       <Typography variant="body1" color="primary">
-        ${product.price}
+        {product.price}€
       </Typography>
     </CardContent>
   </Card>

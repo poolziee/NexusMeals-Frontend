@@ -1,7 +1,6 @@
 import { Box, Card, CardMedia, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-const currency = "$";
 const ChefCard = ({ chef, ...other }) => {
   const navigate = useNavigate();
 
