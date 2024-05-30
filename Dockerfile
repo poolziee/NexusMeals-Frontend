@@ -6,6 +6,8 @@ COPY . /app
 RUN npm install
 RUN npm run build
 
+ENV VITE_DOMAIN="api"
+
 FROM ubuntu
 RUN apt-get update
 RUN apt-get install nginx -y
