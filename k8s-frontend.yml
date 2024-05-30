@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nex-frontend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nex-frontend
+  template:
+    metadata:
+      labels:
+        app: nex-frontend
+    spec:
+      containers:
+        - name: nex-frontend
+          image: poolziee/nexusmeals-frontend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          env:
+            - name: VITE_DOMAIN
+              value: api
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nex-frontend
+spec:
+  selector:
+    app: nex-frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
