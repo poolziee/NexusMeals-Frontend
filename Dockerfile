@@ -3,10 +3,10 @@ FROM node:18-alpine3.17 as build
 WORKDIR /app
 COPY . /app
 
+ENV VITE_DOMAIN="api"
+
 RUN npm install
 RUN npm run build
-
-ENV VITE_DOMAIN="api"
 
 FROM ubuntu
 RUN apt-get update
